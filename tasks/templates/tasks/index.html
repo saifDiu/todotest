@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<h2 class="container">To do App</h2>
+<div class="">
+  <form class="container" action="/" method="POST">
+    {% csrf_token %}
+    {{ forms.title }}
+    <input  type="submit" name="add" value="Add">
+  </form>
+</div>
+
+{% for task in tasks %}
+  <div class="container" class="row">
+    <a class="btn btn-sm btn-info"  href="{% url 'update_task' task.id %}">Update</a>
+    <a class="btn btn-sm btn-danger" href="{% url 'delete_task' task.id %}">Delete</a>
+    {% if task.complete %}
+    <strike>{{ task }}</strike>
+    {% else %}
+    <span>{{ task }}</span>
+    {% endif %}
+  </div>
+{% endfor %}
